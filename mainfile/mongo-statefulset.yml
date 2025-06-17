@@ -33,8 +33,6 @@ spec:
         - name: mongo
           image: mongo:4.2
           command:
-            - "numactl"
-            - "--interleave=all"
             - "mongod"
             - "--wiredTigerCacheSizeGB"
             - "0.1"
@@ -53,7 +51,7 @@ spec:
       spec:
         accessModes:
           - ReadWriteOnce
-        storageClassName: gp2
+        storageClassName: standard  # <-- Changed here for Minikube
         resources:
           requests:
             storage: 0.5Gi
