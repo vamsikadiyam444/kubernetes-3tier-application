@@ -64,6 +64,7 @@ To create Mongo statefulset with Persistent volumes, run the command in manifest
 ```kubectl apply -f mongo-statefulset.yaml```
 
 Mongo service
+
 `kubectl apply -f mongo-service.yaml`
 
 On the mongo-0 pod, initialise the Mongo database Replica set. In the terminal run the following command:
