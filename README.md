@@ -44,11 +44,11 @@ Start with Minikube as cluster
 
 **command to install**
 
-```Invoke-WebRequest -Uri "https://storage.googleapis.com/minikube/releases/latest/minikube-windows-amd64.exe" -OutFile "minikube.exe"```
+`Invoke-WebRequest -Uri "https://storage.googleapis.com/minikube/releases/latest/minikube-windows-amd64.exe" -OutFile "minikube.exe"`
 
 **Install it to /usr/local/bin:**
 
-sudo install minikube-linux-amd64 /usr/local/bin/minikube
+`sudo install minikube-linux-amd64 /usr/local/bin/minikube`
 
 **command toStart minikube**
 
@@ -56,7 +56,7 @@ Minikube start
 
 Verfiy installation
 
-``` Minikube version```
+` Minikube version`
 
 MONGO Database Setup
 
@@ -64,10 +64,11 @@ To create Mongo statefulset with Persistent volumes, run the command in manifest
 ```kubectl apply -f mongo-statefulset.yaml```
 
 Mongo service
-```kubectl apply -f mongo-service.yaml```
+`kubectl apply -f mongo-service.yaml`
 
 On the mongo-0 pod, initialise the Mongo database Replica set. In the terminal run the following command:
-```cat << EOF | kubectl exec -it mongo-0 -- mongo
+
+`cat << EOF | kubectl exec -it mongo-0 -- mongo
 rs.initiate();
 sleep(2000);
 rs.add("mongo-1.mongo:27017");
@@ -78,17 +79,16 @@ cfg = rs.conf();
 cfg.members[0].host = "mongo-0.mongo:27017";
 rs.reconfig(cfg, {force: true});
 sleep(5000);
-EOF ```
+EOF `
 
 To confirm run this in the terminal:
 
-```kubectl exec -it mongo-0 -- mongo --eval "rs.status()" | grep "PRIMARY\|SECONDARY"```
+`kubectl exec -it mongo-0 -- mongo --eval "rs.status()" | grep "PRIMARY\|SECONDARY"`
 
 Load the Data in the database by running this command:
 
-cat << EOF | kubectl exec -it mongo-0 -- mongo
-
-```use langdb;
+`cat << EOF | kubectl exec -it mongo-0 -- mongo`
+use langdb;
 db.languages.insert({"name" : "csharp", "codedetail" : { "usecase" : "system, web, server-side", "rank" : 5, "compiled" : false, "homepage" : "https://dotnet.microsoft.com/learn/csharp", "download" : "https://dotnet.microsoft.com/download/", "votes" : 0}});
 db.languages.insert({"name" : "python", "codedetail" : { "usecase" : "system, web, server-side", "rank" : 3, "script" : false, "homepage" : "https://www.python.org/", "download" : "https://www.python.org/downloads/", "votes" : 0}});
 db.languages.insert({"name" : "javascript", "codedetail" : { "usecase" : "web, client-side", "rank" : 7, "script" : false, "homepage" : "https://en.wikipedia.org/wiki/JavaScript", "download" : "n/a", "votes" : 0}});
@@ -97,32 +97,31 @@ db.languages.insert({"name" : "java", "codedetail" : { "usecase" : "system, web,
 db.languages.insert({"name" : "nodejs", "codedetail" : { "usecase" : "system, web, server-side", "rank" : 20, "script" : false, "homepage" : "https://nodejs.org/en/", "download" : "https://nodejs.org/en/download/", "votes" : 0}});
 
 db.languages.find().pretty();
-EOF```
+EOF`
 
 Create MongoDb Secret
 
-```kubectl apply -f mongo-secret.yaml```
-
+`kubectl apply -f mongo-secret.yaml`
 
 **API SetUp**
 
 Create GO API deployment by running the following command:
 
-```kubectl apply -f api-deployment.yaml```
+`kubectl apply -f api-deployment.yaml`
 
 Create GO API service to expose by running the following command:
 
-```kubectl apply -f api-service.yaml```
+`kubectl apply -f api-service.yaml`
 
 **Frontend setup**
 
 Create the Frontend Deployment resource. In the terminal run the following command:
 
-```kubectl apply -f frontend-deployment.yaml```
+`kubectl apply -f frontend-deployment.yaml`
 
 Create the Frontend Service resource to expose. run the following command:
 
-```kubectl -f apply api-service.yaml```
+`kubectl apply -f api-service.yaml`
 
 Test the full end-to-end cloud native application
 
@@ -130,7 +129,7 @@ Using your local workstation's browser - browse to the URL created in the previo
 
 Query the MongoDB database directly to observe the updated vote data. In the terminal execute the following command:
 
-```kubectl exec -it mongo-0 -- mongo langdb --eval "db.languages.find().pretty()"```
+`kubectl exec -it mongo-0 -- mongo langdb --eval "db.languages.find().pretty()"`
 
 **Summary**
 
