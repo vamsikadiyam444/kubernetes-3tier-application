@@ -40,4 +40,19 @@ Creating and deploying this cloud-native web voting application with Kubernetes 
 
 **By completing this project, you will gain a better grasp of cloud-native application development, containerization, Kubernetes, and the numerous technologies used to build and deploy modern web apps.**
 
+Start with Minikube as cluster 
+**command to install**
+```powershell Invoke-WebRequest -Uri "https://storage.googleapis.com/minikube/releases/latest/minikube-windows-amd64.exe" -OutFile "minikube.exe"```
+
+**Install it to /usr/local/bin:**
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+**command toStart minikube**
+Minikube start
+Verfiy installation
+```bash Minikube start```
+
+
+MONGO Database Setup
+To create Mongo statefulset with Persistent volumes, run the command in manifests folder:
+kubectl apply -f mongo-statefulset.yaml
 
