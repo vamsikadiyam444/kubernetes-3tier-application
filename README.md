@@ -41,13 +41,17 @@ Creating and deploying this cloud-native web voting application with Kubernetes 
 **By completing this project, you will gain a better grasp of cloud-native application development, containerization, Kubernetes, and the numerous technologies used to build and deploy modern web apps.**
 
 Start with Minikube as cluster 
+
 **command to install**
+
 ```Invoke-WebRequest -Uri "https://storage.googleapis.com/minikube/releases/latest/minikube-windows-amd64.exe" -OutFile "minikube.exe"```
 
 **Install it to /usr/local/bin:**
+
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
 **command toStart minikube**
+
 Minikube start
 
 Verfiy installation
@@ -79,6 +83,7 @@ EOF ```
 To confirm run this in the terminal:
 
 ```kubectl exec -it mongo-0 -- mongo --eval "rs.status()" | grep "PRIMARY\|SECONDARY"```
+
 Load the Data in the database by running this command:
 
 cat << EOF | kubectl exec -it mongo-0 -- mongo
@@ -97,6 +102,7 @@ EOF```
 Create MongoDb Secret
 
 ```kubectl apply -f mongo-secret.yaml```
+
 
 **API SetUp**
 
